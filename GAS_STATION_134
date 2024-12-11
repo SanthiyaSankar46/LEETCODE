@@ -1,0 +1,24 @@
+// gas station
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n=gas.length;
+        int net_gas=0,i=0;
+        for(i=0;i<n;i++){
+            net_gas+=gas[i]-cost[i];
+        }
+        if(net_gas<0){
+            return -1;
+        }
+        int startindex=0;
+        int remaining_gas=0;
+        for(i=0;i<n;i++){
+            int current_gas=gas[i]+remaining_gas;
+            int current_cost=cost[i];
+            remaining_gas=current_gas-current_cost;
+            if(remaining_gas<0){
+                remaining_gas=0;
+                startindex=i+1;
+            }
+        }return startindex;
+    }
+}
